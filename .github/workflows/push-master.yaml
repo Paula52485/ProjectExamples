@@ -8,18 +8,21 @@ jobs:
   build:
 
     runs-on: windows-latest
-    timeout-minutes: 15
+    timeout-minutes: 120
     
+    env: 
+      TIINGO_KEY: ${{ secrets.TIINGO_KEY }} 
+
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 6.0.101
+        dotnet-version: 6.0.x
     - name: Restore tools
       run: dotnet tool restore
     - name: Run fsdocs
-      run: dotnet fsdocs build --eval --strict --properties Configuration=Release --parameters fsdocs-list-of-namespaces " "
+      run: dotnet fsdocs build --eval --properties Configuration=Release --parameters fsdocs-list-of-namespaces " "
     - name: Deploy docs
       uses: peaceiris/actions-gh-pages@v3
       with:
