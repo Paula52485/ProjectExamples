@@ -1,5 +1,3 @@
-(**This is my page*)
-
 
 #load "YahooFinance.fsx"
 
@@ -18,4 +16,3 @@ twnk
 |>Chart.Line
 |>GenericChart.toChartHTML
 
-(**include-it-raw**)
